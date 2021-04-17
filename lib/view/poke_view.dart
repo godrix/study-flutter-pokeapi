@@ -1,5 +1,8 @@
+import 'package:cubos_boy/controller/poke_controller.dart';
+import 'package:cubos_boy/interfaces/pokemon.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PokeView extends StatefulWidget {
   @override
@@ -7,9 +10,11 @@ class PokeView extends StatefulWidget {
 }
 
 class _PokeViewState extends State<PokeView> {
+  final controller = PokeController();
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Container(
         child: Container(
       color: HexColor('#D4D0CF'),
       child: Column(
@@ -22,7 +27,50 @@ class _PokeViewState extends State<PokeView> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(width: 250, height: 150, color: HexColor('#ADAB01'))
+                Container(
+                  width: 250,
+                  height: 150,
+                  color: HexColor('#ADAB01'),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FutureBuilder<Pokemon>(
+                        future: controller.pokemon,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState !=
+                              ConnectionState.done) {
+                            return CircularProgressIndicator();
+                          }
+                          if (snapshot.hasData) {
+                            return Column(
+                              children: [
+                                Image.network(
+                                  snapshot.data.imgUrl,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                                Container(
+                                  child: Text(snapshot.data.name,
+                                      style: GoogleFonts.pressStart2p(
+                                        textStyle: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                          decoration: TextDecoration.none,
+                                        ),
+                                      )),
+                                ),
+                              ],
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text(snapshot.error);
+                          }
+                          return Container();
+                        },
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           ),
@@ -41,10 +89,12 @@ class _PokeViewState extends State<PokeView> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                print("top clicjed");
+                                setState(() {
+                                  controller.loadPokemon();
+                                });
                               },
                               child: Container(
-                                color: Colors.red,
+                                color: Colors.black,
                                 width: 25,
                                 height: 25,
                               ),
@@ -74,10 +124,10 @@ class _PokeViewState extends State<PokeView> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                print("bottom clicjed");
+                                controller.loadPokemon();
                               },
                               child: Container(
-                                color: Colors.red,
+                                color: Colors.black,
                                 width: 25,
                                 height: 25,
                               ),
