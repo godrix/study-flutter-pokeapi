@@ -90,7 +90,7 @@ class _PokeViewState extends State<PokeView> {
                             GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  controller.loadPokemon();
+                                  controller.nextPokemon();
                                 });
                               },
                               child: Container(
@@ -124,7 +124,9 @@ class _PokeViewState extends State<PokeView> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                controller.loadPokemon();
+                                setState(() {
+                                  controller.previusPokemon();
+                                });
                               },
                               child: Container(
                                 color: Colors.black,
@@ -144,23 +146,37 @@ class _PokeViewState extends State<PokeView> {
                               width: 50,
                               height: 50,
                             ),
-                            Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  color: HexColor('#930554'),
-                                  borderRadius: BorderRadius.circular(25)),
-                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  controller.randomPokemon();
+                                });
+                              },
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    color: HexColor('#930554'),
+                                    borderRadius: BorderRadius.circular(25)),
+                              ),
+                            )
                           ],
                         ),
                         Row(
                           children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  color: HexColor('#930554'),
-                                  borderRadius: BorderRadius.circular(25)),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  controller.randomPokemon();
+                                });
+                              },
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    color: HexColor('#930554'),
+                                    borderRadius: BorderRadius.circular(25)),
+                              ),
                             ),
                             Container(
                               width: 50,
@@ -180,27 +196,56 @@ class _PokeViewState extends State<PokeView> {
                       child: Row(
                         children: [
                           Transform.rotate(
-                            angle: -45,
-                            child: Container(
-                              margin: EdgeInsets.all(10),
-                              width: 60,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                  color: HexColor('#7A7C89'),
-                                  borderRadius: BorderRadius.circular(15)),
-                            ),
-                          ),
+                              angle: -45,
+                              child: Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        controller.resetpokemon();
+                                      });
+                                    },
+                                    child: Container(
+                                      width: 50,
+                                      height: 15,
+                                      margin: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          color: HexColor('#7A7C89'),
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Start',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                        decoration: TextDecoration.none),
+                                  )
+                                ],
+                              )),
                           Transform.rotate(
-                            angle: -45,
-                            child: Container(
-                              margin: EdgeInsets.all(10),
-                              width: 60,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                  color: HexColor('#7A7C89'),
-                                  borderRadius: BorderRadius.circular(15)),
-                            ),
-                          ),
+                              angle: -45,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 50,
+                                    height: 15,
+                                    margin: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        color: HexColor('#7A7C89'),
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                  ),
+                                  Text(
+                                    'Select',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                        decoration: TextDecoration.none),
+                                  )
+                                ],
+                              )),
                         ],
                       ),
                     )
