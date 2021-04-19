@@ -1,6 +1,6 @@
 # cubos_boy
 
-A new Flutter project.
+![aplication example](.github/example.gif "Poke api in flutter")
 
 ## Getting Started
 
