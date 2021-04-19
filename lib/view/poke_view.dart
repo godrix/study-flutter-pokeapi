@@ -1,3 +1,4 @@
+import 'package:cubos_boy/components/controllButton.dart';
 import 'package:cubos_boy/controller/poke_controller.dart';
 import 'package:cubos_boy/interfaces/pokemon.dart';
 import 'package:flutter/material.dart';
@@ -83,60 +84,17 @@ class _PokeViewState extends State<PokeView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  controller.nextPokemon();
-                                });
-                              },
-                              child: Container(
-                                color: Colors.black,
-                                width: 25,
-                                height: 25,
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              color: Colors.black,
-                              width: 25,
-                              height: 25,
-                            ),
-                            Container(
-                              color: Colors.black,
-                              width: 25,
-                              height: 25,
-                            ),
-                            Container(
-                              color: Colors.black,
-                              width: 25,
-                              height: 25,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  controller.previusPokemon();
-                                });
-                              },
-                              child: Container(
-                                color: Colors.black,
-                                width: 25,
-                                height: 25,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
+                    ControllButton(
+                      pressUp: () {
+                        setState(() {
+                          controller.nextPokemon();
+                        });
+                      },
+                      pressDown: () {
+                        setState(() {
+                          controller.previusPokemon();
+                        });
+                      },
                     ),
                     Column(
                       children: [
