@@ -43,26 +43,47 @@ class _PokeViewState extends State<PokeView> {
                             return CircularProgressIndicator();
                           }
                           if (snapshot.hasData) {
-                            return Column(
-                              children: [
-                                Image.network(
-                                  snapshot.data.imgUrl,
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
+                            if (controller.visibilityAbility) {
+                              return Container(
+                                width: 250,
+                                height: 200,
+                                child: ListView.builder(
+                                  itemCount: snapshot.data.abilities.length,
+                                  itemBuilder: (context, index) {
+                                    return Text(
+                                        snapshot.data.abilities[index].name,
+                                        style: GoogleFonts.pressStart2p(
+                                          textStyle: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        ));
+                                  },
                                 ),
-                                Container(
-                                  child: Text(snapshot.data.name,
-                                      style: GoogleFonts.pressStart2p(
-                                        textStyle: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                          decoration: TextDecoration.none,
-                                        ),
-                                      )),
-                                ),
-                              ],
-                            );
+                              );
+                            } else {
+                              return Column(
+                                children: [
+                                  Image.network(
+                                    snapshot.data.imgUrl,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Container(
+                                    child: Text(snapshot.data.name,
+                                        style: GoogleFonts.pressStart2p(
+                                          textStyle: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black,
+                                            decoration: TextDecoration.none,
+                                          ),
+                                        )),
+                                  ),
+                                ],
+                              );
+                            }
                           } else if (snapshot.hasError) {
                             return Text(snapshot.error);
                           }
@@ -93,6 +114,16 @@ class _PokeViewState extends State<PokeView> {
                       pressDown: () {
                         setState(() {
                           controller.previusPokemon();
+                        });
+                      },
+                      pressLeft: () {
+                        setState(() {
+                          controller.hideAbility();
+                        });
+                      },
+                      pressRight: () {
+                        setState(() {
+                          controller.showAbility();
                         });
                       },
                     ),

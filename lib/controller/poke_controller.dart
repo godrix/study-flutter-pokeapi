@@ -7,6 +7,7 @@ class PokeController {
   final model = PokeModel();
 
   int pokeNumber = 0;
+  bool visibilityAbility = false;
 
   Future<Pokemon> get pokemon => model.pokemon;
 
@@ -17,6 +18,14 @@ class PokeController {
       pokeNumber--;
       model.fetchPokemon(pokeNumber);
     }
+  }
+
+  showAbility() {
+    visibilityAbility = true;
+  }
+
+  hideAbility() {
+    visibilityAbility = false;
   }
 
   nextPokemon() {
