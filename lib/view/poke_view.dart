@@ -50,15 +50,21 @@ class _PokeViewState extends State<PokeView> {
                                 child: ListView.builder(
                                   itemCount: snapshot.data.abilities.length,
                                   itemBuilder: (context, index) {
-                                    return Text(
-                                        snapshot.data.abilities[index].name,
-                                        style: GoogleFonts.pressStart2p(
-                                          textStyle: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.black,
-                                            decoration: TextDecoration.none,
-                                          ),
-                                        ));
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                            snapshot.data.abilities[index].name,
+                                            style: GoogleFonts.pressStart2p(
+                                              textStyle: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.black,
+                                                decoration: TextDecoration.none,
+                                              ),
+                                            )),
+                                      ],
+                                    );
                                   },
                                 ),
                               );
